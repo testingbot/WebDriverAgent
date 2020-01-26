@@ -46,6 +46,7 @@ static NSString *FBAcceptAlertButtonSelector = @"";
 static NSString *FBDismissAlertButtonSelector = @"";
 static NSString *FBSnapshotMaxDepthKey = @"maxDepth";
 static NSMutableDictionary *FBSnapshotRequestParameters;
+static BOOL FBSkipAdjustingScreenshotCoordinate = NO;
 
 
 @implementation FBConfiguration
@@ -341,6 +342,16 @@ static NSMutableDictionary *FBSnapshotRequestParameters;
 + (NSString *)dismissAlertButtonSelector
 {
   return FBDismissAlertButtonSelector;
+}
+
++ (void)setSkipAdjustingScreenshotCoordinate:(BOOL)isEnabled
+{
+  FBSkipAdjustingScreenshotCoordinate = isEnabled;
+}
+
++ (BOOL)skipAdjustingScreenshotCoordinate
+{
+  return FBSkipAdjustingScreenshotCoordinate;
 }
 
 #pragma mark Private

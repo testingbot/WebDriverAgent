@@ -10,6 +10,7 @@
 #import "FBImageUtils.h"
 
 #import "FBMacros.h"
+#import "FBConfiguration.h"
 
 static uint8_t JPEG_MAGIC[] = { 0xff, 0xd8 };
 static const NSUInteger JPEG_MAGIC_LEN = 2;
@@ -67,7 +68,7 @@ NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData)
 NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData, UIInterfaceOrientation orientation)
 {
   UIImageOrientation imageOrientation;
-  if (SYSTEM_VERSION_LESS_THAN(@"11.0")) {
+  if (SYSTEM_VERSION_LESS_THAN(@"11.0") || FBConfiguration.skipAdjustingScreenshotCoordinate) {
     // In iOS < 11.0 screenshots are already adjusted properly
     imageOrientation = UIImageOrientationUp;
   } else if (orientation == UIInterfaceOrientationLandscapeRight) {
