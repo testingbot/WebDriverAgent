@@ -344,7 +344,7 @@ static BOOL FBSkipAdjustingScreenshotOrientation = NO;
   return FBDismissAlertButtonSelector;
 }
 
-+ (void)setSkipAdjustingScreenshotOrientation:(BOOL)isEnabled:(BOOL)isEnabled
++ (void)setSkipAdjustingScreenshotOrientation:(BOOL)isEnabled
 {
   FBSkipAdjustingScreenshotOrientation = isEnabled;
 }
