@@ -68,21 +68,23 @@ NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData)
 NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData, UIInterfaceOrientation orientation)
 {
   UIImageOrientation imageOrientation;
-  if (SYSTEM_VERSION_LESS_THAN(@"11.0") || FBConfiguration.skipAdjustingScreenshotOrientation) {
-    // In iOS < 11.0 screenshots are already adjusted properly
-    imageOrientation = UIImageOrientationUp;
-  } else if (orientation == UIInterfaceOrientationLandscapeRight) {
-    imageOrientation = UIImageOrientationLeft;
-  } else if (orientation == UIInterfaceOrientationLandscapeLeft) {
-    imageOrientation = UIImageOrientationRight;
-  } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-    imageOrientation = UIImageOrientationDown;
-  } else {
-    if (FBIsPngImage(screenshotData)) {
-      return screenshotData;
+  // Apply auto rotation by default for iOS >= 11.0. In iOS < 11.0 screenshots are already adjusted properly.
+  if (FBConfiguration.autoAdjustScreenshotOrientation && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
+    if (orientation == UIInterfaceOrientationLandscapeRight) {
+      imageOrientation = UIImageOrientationLeft;
+    } else if (orientation == UIInterfaceOrientationLandscapeLeft) {
+      imageOrientation = UIImageOrientationRight;
+    } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+      imageOrientation = UIImageOrientationDown;
+    } else {
+      if (FBIsPngImage(screenshotData)) {
+        return screenshotData;
+      }
+      UIImage *image = [UIImage imageWithData:screenshotData];
+      return (NSData *)UIImagePNGRepresentation(image);
     }
-    UIImage *image = [UIImage imageWithData:screenshotData];
-    return (NSData *)UIImagePNGRepresentation(image);
+  } else {
+    imageOrientation = UIImageOrientationUp;
   }
 
   UIImage *image = [UIImage imageWithData:screenshotData];

@@ -46,7 +46,7 @@ static NSString *FBAcceptAlertButtonSelector = @"";
 static NSString *FBDismissAlertButtonSelector = @"";
 static NSString *FBSnapshotMaxDepthKey = @"maxDepth";
 static NSMutableDictionary *FBSnapshotRequestParameters;
-static BOOL FBSkipAdjustingScreenshotOrientation = NO;
+static BOOL FBAutoAdjustScreenshotOrientation = YES;
 
 
 @implementation FBConfiguration
@@ -344,14 +344,14 @@ static BOOL FBSkipAdjustingScreenshotOrientation = NO;
   return FBDismissAlertButtonSelector;
 }
 
-+ (void)setSkipAdjustingScreenshotOrientation:(BOOL)isEnabled
++ (void)setAutoAdjustScreenshotOrientation:(BOOL)isEnabled
 {
-  FBSkipAdjustingScreenshotOrientation = isEnabled;
+  FBAutoAdjustScreenshotOrientation = isEnabled;
 }
 
-+ (BOOL)skipAdjustingScreenshotOrientation
++ (BOOL)autoAdjustScreenshotOrientation
 {
-  return FBSkipAdjustingScreenshotOrientation;
+  return FBAutoAdjustScreenshotOrientation;
 }
 
 #pragma mark Private
