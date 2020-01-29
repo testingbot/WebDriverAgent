@@ -211,15 +211,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)dismissAlertButtonSelector;
 
 /**
- Skip adjusting the screenshot coordinate.
+ Skip adjusting the screenshot orientation.
  The adjustment helps to fix the screenshot coordinate when a user change the device orientation.
  But the logic sometimes cannot set the screenshot orientation properly. Skiping the logic can fix it.
- Xcode versions, OS versions or device models and simulator or real device could be related.
+ Xcode versions, OS versions or device models and simulator or real device could influence this logic.
 
  @param isEnabled Set to YES in order to skip adjusting screenshot coordinate. Defaults to false.
  */
-+ (void)setSkipAdjustingScreenshotCoordinate:(BOOL)isEnabled;
-+ (BOOL)skipAdjustingScreenshotCoordinate;
++ (void)setSkipAdjustingScreenshotOrientation:(BOOL)isEnabled;
++ (BOOL)skipAdjustingScreenshotOrientation;
 
 
 @end
