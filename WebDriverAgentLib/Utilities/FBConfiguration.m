@@ -46,7 +46,10 @@ static NSString *FBAcceptAlertButtonSelector = @"";
 static NSString *FBDismissAlertButtonSelector = @"";
 static NSString *FBSnapshotMaxDepthKey = @"maxDepth";
 static NSMutableDictionary *FBSnapshotRequestParameters;
-static NSString *FBScreenshotOrientation = @"Auto";
+
+#if !TARGET_OS_TV
+static UIInterfaceOrientation FBScreenshotOrientation = UIInterfaceOrientationUnknown;
+#endif
 
 @implementation FBConfiguration
 
@@ -343,27 +346,31 @@ static NSString *FBScreenshotOrientation = @"Auto";
   return FBDismissAlertButtonSelector;
 }
 
+#if !TARGET_OS_TV
 + (void)setScreenshotOrientation:(NSString *)orientation
 {
+  // Only UIInterfaceOrientationUnknown is over iOS 8. Others are over iOS 2.
+  // https://developer.apple.com/documentation/uikit/uiinterfaceorientation/uiinterfaceorientationunknown
   if (orientation == nil) {
-    FBScreenshotOrientation = @"Auto";
+    FBScreenshotOrientation = UIInterfaceOrientationUnknown;
   } else if ([orientation.lowercaseString isEqualToString:@"portrait"]) {
-    FBScreenshotOrientation = @"Portrait";
+    FBScreenshotOrientation = UIInterfaceOrientationPortrait;
   } else if ([orientation.lowercaseString isEqualToString:@"portraitupsidedown"]) {
-    FBScreenshotOrientation = @"PortraitUpsideDown";
+    FBScreenshotOrientation = UIInterfaceOrientationPortraitUpsideDown;
   } else if ([orientation.lowercaseString isEqualToString:@"landscaperight"]) {
-    FBScreenshotOrientation = @"LandscapeRight";
+    FBScreenshotOrientation = UIInterfaceOrientationLandscapeRight;
   }else if ([orientation.lowercaseString isEqualToString:@"landscapeleft"]) {
-    FBScreenshotOrientation = @"LandscapeLeft";
+    FBScreenshotOrientation = UIInterfaceOrientationLandscapeLeft;
   } else {
-    FBScreenshotOrientation = @"Auto";
+    FBScreenshotOrientation = UIInterfaceOrientationUnknown;
   }
 }
 
-+ (NSString *)screenshotOrientation
++ (NSInteger)screenshotOrientation
 {
   return FBScreenshotOrientation;
 }
+#endif
 
 #pragma mark Private
 

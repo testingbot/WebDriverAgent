@@ -70,7 +70,7 @@ NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData, UIIn
 
   UIImageOrientation imageOrientation;
   // Apply auto rotation by default for iOS >= 11.0. In iOS < 11.0 screenshots are already adjusted properly.
-  if ([FBConfiguration.screenshotOrientation isEqualToString:@"Auto"] && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
+  if (FBConfiguration.screenshotOrientation == UIInterfaceOrientationUnknown && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")) {
     if (orientation == UIInterfaceOrientationLandscapeRight) {
       imageOrientation = UIImageOrientationLeft;
     } else if (orientation == UIInterfaceOrientationLandscapeLeft) {
@@ -85,11 +85,11 @@ NSData *FBAdjustScreenshotOrientationForApplication(NSData *screenshotData, UIIn
       return (NSData *)UIImagePNGRepresentation(image);
     }
   } else {
-    if ([FBConfiguration.screenshotOrientation isEqualToString:@"PortraitUpsideDown"]) {
+    if (FBConfiguration.screenshotOrientation == UIInterfaceOrientationPortraitUpsideDown) {
       imageOrientation = UIImageOrientationDown;
-    } else if ([FBConfiguration.screenshotOrientation isEqualToString:@"LandscapeRight"]) {
+    } else if (FBConfiguration.screenshotOrientation == UIInterfaceOrientationLandscapeRight) {
       imageOrientation = UIImageOrientationLeft;
-    }else if ([FBConfiguration.screenshotOrientation isEqualToString:@"LandscapeLeft"]) {
+    }else if (FBConfiguration.screenshotOrientation == UIInterfaceOrientationLandscapeLeft) {
       imageOrientation = UIImageOrientationRight;
     } else {
       imageOrientation = UIImageOrientationUp;

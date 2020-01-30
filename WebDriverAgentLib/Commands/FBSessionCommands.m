@@ -328,9 +328,12 @@ static NSString* const SCREENSHOT_ORIENTATION = @"screenshotOrientation";
   if (nil != [settings objectForKey:DISMISS_ALERT_BUTTON_SELECTOR]) {
     [FBConfiguration setDismissAlertButtonSelector:(NSString *)[settings objectForKey:DISMISS_ALERT_BUTTON_SELECTOR]];
   }
+
+#if !TARGET_OS_TV
   if (nil != [settings objectForKey:SCREENSHOT_ORIENTATION]) {
     [FBConfiguration setScreenshotOrientation:(NSString *)[settings objectForKey:SCREENSHOT_ORIENTATION]];
   }
+#endif
 
   return [self handleGetSettings:request];
 }

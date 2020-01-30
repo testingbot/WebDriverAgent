@@ -210,8 +210,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setDismissAlertButtonSelector:(NSString *)classChainSelector;
 + (NSString *)dismissAlertButtonSelector;
 
+#if !TARGET_OS_TV
 /**
- Auto adjust the screenshot orientation.
+ Adjust the screenshot orientation for iOS
  The adjustment helps to fix the screenshot coordinate when a user change the device orientation.
  But the logic sometimes cannot set the screenshot orientation properly. Skiping the logic can fix it.
  Xcode versions, OS versions or device models and simulator or real device could influence this logic.
@@ -219,7 +220,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param orientation Set to NO in order to skip adjusting screenshot coordinate. Defaults to YES.
  */
 + (void)setScreenshotOrientation:(NSString *)orientation;
-+ (NSString *)screenshotOrientation;
++ (NSInteger)screenshotOrientation;
+#endif
 
 @end
 
