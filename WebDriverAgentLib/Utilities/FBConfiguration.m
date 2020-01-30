@@ -46,8 +46,7 @@ static NSString *FBAcceptAlertButtonSelector = @"";
 static NSString *FBDismissAlertButtonSelector = @"";
 static NSString *FBSnapshotMaxDepthKey = @"maxDepth";
 static NSMutableDictionary *FBSnapshotRequestParameters;
-static BOOL FBAutoAdjustScreenshotOrientation = YES;
-
+static NSString *FBScreenshotOrientation = @"Auto";
 
 @implementation FBConfiguration
 
@@ -344,14 +343,26 @@ static BOOL FBAutoAdjustScreenshotOrientation = YES;
   return FBDismissAlertButtonSelector;
 }
 
-+ (void)setAutoAdjustScreenshotOrientation:(BOOL)isEnabled
++ (void)setScreenshotOrientation:(NSString *)orientation
 {
-  FBAutoAdjustScreenshotOrientation = isEnabled;
+  if (orientation == nil) {
+    FBScreenshotOrientation = @"Auto";
+  } else if ([orientation.lowercaseString isEqualToString:@"portrait"]) {
+    FBScreenshotOrientation = @"Portrait";
+  } else if ([orientation.lowercaseString isEqualToString:@"portraitupsidedown"]) {
+    FBScreenshotOrientation = @"PortraitUpsideDown";
+  } else if ([orientation.lowercaseString isEqualToString:@"landscaperight"]) {
+    FBScreenshotOrientation = @"LandscapeRight";
+  }else if ([orientation.lowercaseString isEqualToString:@"landscapeleft"]) {
+    FBScreenshotOrientation = @"LandscapeLeft";
+  } else {
+    FBScreenshotOrientation = @"Auto";
+  }
 }
 
-+ (BOOL)autoAdjustScreenshotOrientation
++ (NSString *)screenshotOrientation
 {
-  return FBAutoAdjustScreenshotOrientation;
+  return FBScreenshotOrientation;
 }
 
 #pragma mark Private

@@ -43,7 +43,7 @@ static NSString* const ACTIVE_APP_DETECTION_POINT = @"activeAppDetectionPoint";
 static NSString* const INCLUDE_NON_MODAL_ELEMENTS = @"includeNonModalElements";
 static NSString* const ACCEPT_ALERT_BUTTON_SELECTOR = @"acceptAlertButtonSelector";
 static NSString* const DISMISS_ALERT_BUTTON_SELECTOR = @"dismissAlertButtonSelector";
-static NSString* const AUTO_ADJUST_SCREENSHOT_ORIENTATION = @"autoAdjustScreenshotOrientation";
+static NSString* const SCREENSHOT_ORIENTATION = @"screenshotOrientation";
 
 
 @implementation FBSessionCommands
@@ -328,8 +328,8 @@ static NSString* const AUTO_ADJUST_SCREENSHOT_ORIENTATION = @"autoAdjustScreensh
   if (nil != [settings objectForKey:DISMISS_ALERT_BUTTON_SELECTOR]) {
     [FBConfiguration setDismissAlertButtonSelector:(NSString *)[settings objectForKey:DISMISS_ALERT_BUTTON_SELECTOR]];
   }
-  if (nil != [settings objectForKey:AUTO_ADJUST_SCREENSHOT_ORIENTATION]) {
-    [FBConfiguration setAutoAdjustScreenshotOrientation:[[settings objectForKey:AUTO_ADJUST_SCREENSHOT_ORIENTATION] boolValue]];
+  if (nil != [settings objectForKey:SCREENSHOT_ORIENTATION]) {
+    [FBConfiguration setScreenshotOrientation:(NSString *)[settings objectForKey:SCREENSHOT_ORIENTATION]];
   }
 
   return [self handleGetSettings:request];

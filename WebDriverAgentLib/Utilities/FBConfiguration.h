@@ -216,11 +216,10 @@ NS_ASSUME_NONNULL_BEGIN
  But the logic sometimes cannot set the screenshot orientation properly. Skiping the logic can fix it.
  Xcode versions, OS versions or device models and simulator or real device could influence this logic.
 
- @param isEnabled Set to NO in order to skip adjusting screenshot coordinate. Defaults to YES.
+ @param orientation Set to NO in order to skip adjusting screenshot coordinate. Defaults to YES.
  */
-+ (void)setAutoAdjustScreenshotOrientation:(BOOL)isEnabled;
-+ (BOOL)autoAdjustScreenshotOrientation;
-
++ (void)setScreenshotOrientation:(NSString *)orientation;
++ (NSString *)screenshotOrientation;
 
 @end
 
