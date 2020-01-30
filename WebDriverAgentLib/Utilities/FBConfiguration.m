@@ -351,9 +351,7 @@ static UIInterfaceOrientation FBScreenshotOrientation = UIInterfaceOrientationUn
 {
   // Only UIInterfaceOrientationUnknown is over iOS 8. Others are over iOS 2.
   // https://developer.apple.com/documentation/uikit/uiinterfaceorientation/uiinterfaceorientationunknown
-  if (orientation == nil) {
-    FBScreenshotOrientation = UIInterfaceOrientationUnknown;
-  } else if ([orientation.lowercaseString isEqualToString:@"portrait"]) {
+  if ([orientation.lowercaseString isEqualToString:@"portrait"]) {
     FBScreenshotOrientation = UIInterfaceOrientationPortrait;
   } else if ([orientation.lowercaseString isEqualToString:@"portraitupsidedown"]) {
     FBScreenshotOrientation = UIInterfaceOrientationPortraitUpsideDown;
@@ -369,6 +367,20 @@ static UIInterfaceOrientation FBScreenshotOrientation = UIInterfaceOrientationUn
 + (NSInteger)screenshotOrientation
 {
   return FBScreenshotOrientation;
+}
+
++ (NSString *)screenshotOrientationForUser
+{
+  if (FBScreenshotOrientation == UIInterfaceOrientationPortrait) {
+    return @"Portrait";
+  } else if (FBScreenshotOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+     return @"PortraitUpsideDown";
+  } else if (FBScreenshotOrientation == UIInterfaceOrientationLandscapeRight) {
+     return @"LandscapeRight";
+  } else if (FBScreenshotOrientation == UIInterfaceOrientationLandscapeLeft) {
+     return @"LandscapeLeft";
+  }
+  return @"Auto";
 }
 #endif
 

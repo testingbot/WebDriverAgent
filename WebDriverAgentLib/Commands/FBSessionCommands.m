@@ -259,6 +259,7 @@ static NSString* const SCREENSHOT_ORIENTATION = @"screenshotOrientation";
       INCLUDE_NON_MODAL_ELEMENTS: @([FBConfiguration includeNonModalElements]),
       ACCEPT_ALERT_BUTTON_SELECTOR: FBConfiguration.acceptAlertButtonSelector,
       DISMISS_ALERT_BUTTON_SELECTOR: FBConfiguration.dismissAlertButtonSelector,
+      SCREENSHOT_ORIENTATION: [FBConfiguration screenshotOrientationForUser],
     }
   );
 }

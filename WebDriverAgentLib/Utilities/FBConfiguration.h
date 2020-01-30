@@ -212,15 +212,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if !TARGET_OS_TV
 /**
- Adjust the screenshot orientation for iOS
- The adjustment helps to fix the screenshot coordinate when a user change the device orientation.
- But the logic sometimes cannot set the screenshot orientation properly. Skiping the logic can fix it.
- Xcode versions, OS versions or device models and simulator or real device could influence this logic.
+ Set the screenshot orientation for iOS
 
- @param orientation Set to NO in order to skip adjusting screenshot coordinate. Defaults to YES.
+ It helps to fix the screenshot orientation when the device under test's orientation changes.
+ For example, when a device changes to the landscape, the screenshot orientation could be wrong.
+ Then, this setting can force change the screenshot orientation.
+ Xcode versions, OS versions or device models and simulator or real device could influence it.
+
+ @param orientation Set the orientation to adjust the screenshot.
+ Case insensitive "Portrait", "PortraitUpsideDown", "LandscapeRight" and "LandscapeLeft"  are available
+ to force the coodinate adjust. Other wards are handled as "auto", which handles
+ the adjustment automatically. Defaults to "auto".
  */
 + (void)setScreenshotOrientation:(NSString *)orientation;
+
+/**
+@return The value of UIInterfaceOrientation
+*/
 + (NSInteger)screenshotOrientation;
+
+/**
+@return The orientation as String for human read
+*/
++ (NSString *)screenshotOrientationForUser;
+
 #endif
 
 @end
